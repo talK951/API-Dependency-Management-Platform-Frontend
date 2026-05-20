@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"c:\\\\Users\\\\user\\\\Desktop\\\\BuildMore\\\\API-Dependency-Managment-Platform-Frontend\\\\Frontend\\\\my-app\\\\src\\\\pages\\\\Register.js\")"
+    ]
+  }
+}
