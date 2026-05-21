@@ -68,8 +68,25 @@ function ServicesSidebar({ accountId, selectedService, onSelectService, githubTo
       headers: { Authorization: `Bearer ${githubToken}` },
     })
       .then(r => r.json())
-      .then(data => {
-        setRepos(data.map(r => ({ id: `gh-${r.id}`, serviceName: r.name })));
+      .then(async data => {
+        const checks = await Promise.all(
+          data.map(r =>
+            fetch(`https://api.github.com/repos/${r.full_name}/contents/api-dep-folder`, {
+              headers: { Authorization: `Bearer ${githubToken}` },
+            })
+              .then(async res => {
+                if (!res.ok) return { repo: r, hasFolder: false };
+                const body = await res.json();
+                return { repo: r, hasFolder: Array.isArray(body) };
+              })
+              .catch(() => ({ repo: r, hasFolder: false }))
+          )
+        );
+        setRepos(
+          checks
+            .filter(({ hasFolder }) => hasFolder)
+            .map(({ repo: r }) => ({ id: `gh-${r.id}`, serviceName: r.name }))
+        );
         setReposLoading(false);
       })
       .catch(err => { setReposError(err.message); setReposLoading(false); });

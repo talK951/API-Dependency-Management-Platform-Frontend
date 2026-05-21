@@ -478,6 +478,48 @@ body {
   gap: 12px;
 }
 
+/* ── Service detail + tab bar ────────────────────────────── */
+.service-detail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid #e8eaed;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  border-radius: 0;
+}
+
+.tab-btn:hover {
+  color: #333;
+}
+
+.tab-btn--active {
+  color: #1976d2;
+  border-bottom-color: #1976d2;
+  font-weight: 600;
+}
+
+.tab-panel {
+  flex: 1;
+}
+
 /* ── Responsive breakpoints ──────────────────────────────── */
 
 /* Tablet — narrow the sidebar */
