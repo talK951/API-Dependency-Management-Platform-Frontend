@@ -85,7 +85,7 @@ function ServicesSidebar({ accountId, selectedService, onSelectService, githubTo
         setRepos(
           checks
             .filter(({ hasFolder }) => hasFolder)
-            .map(({ repo: r }) => ({ id: `gh-${r.id}`, serviceName: r.name }))
+            .map(({ repo: r }) => ({ id: `gh-${r.id}`, serviceName: r.name, fullName: r.full_name }))
         );
         setReposLoading(false);
       })
@@ -261,7 +261,7 @@ export default function App() {
         onLogout={handleLogout}
       />
       <main className="content">
-        {selectedService ? <ServiceDetail service={selectedService} /> : <EmptyState />}
+        {selectedService ? <ServiceDetail service={selectedService} githubToken={githubToken} /> : <EmptyState />}
       </main>
     </div>
   );
